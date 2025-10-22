@@ -33,11 +33,10 @@ public class Playercontroller : MonoBehaviour
                 - new Vector3(Player_pos.x, 0, Player_pos.z);
 
         Player_pos = transform.position;
-
         if (diff.magnitude > 0.01f)
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation,
-                Quaternion.LookRotation(diff), 0.2f);
+            transform.rotation =
+                Quaternion.LookRotation(diff);
         }
 
         //ˆÚ“®
