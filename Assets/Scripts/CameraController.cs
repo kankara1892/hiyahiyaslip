@@ -9,22 +9,24 @@ public class CameraController : MonoBehaviour
     Transform _playerTransforme;
     Vector3 _playerPos;
     Vector3 _cameraPos;
-    [SerializeField]
-    Vector3 _cameraToplayerDistance;
+    Vector3 _newcameraPos;
 
     private void Start()
     {
         _playerTransforme = _player.transform;
-        _cameraToplayerDistance = _cameraPos - _playerPos;
     }
     private void FixedUpdate()
     {
         _playerPos = _playerTransforme.position;
         _cameraPos = transform.position;
+        
+        _newcameraPos = new Vector3(_playerPos.x, _cameraPos.y,
+            Mathf.Clamp(_playerPos.z  - 15,_playerPos.z-20,_playerPos.z-5));
 
+        _newcameraPos.x = Mathf.Clamp(_newcameraPos.x,_playerPos.x-2,_playerPos.x +2);
         //cameraí«è]
-        _cameraPos = Vector3.Lerp(transform.position, _playerPos + _cameraToplayerDistance
-                                    , 0.5f* Time.deltaTime);
+        _cameraPos = Vector3.Lerp(transform.position,_newcameraPos
+                                    ,5.0f* Time.deltaTime);
         transform.position = _cameraPos;
     }
 }
