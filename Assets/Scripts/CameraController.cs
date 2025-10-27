@@ -17,6 +17,7 @@ public class CameraController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //cameraí«è]
         _playerPos = _playerTransforme.position;
         _cameraPos = transform.position;
         
@@ -24,7 +25,7 @@ public class CameraController : MonoBehaviour
             Mathf.Clamp(_playerPos.z  - 15,_playerPos.z-20,_playerPos.z-5));
 
         _newcameraPos.x = Mathf.Clamp(_newcameraPos.x,_playerPos.x-2,_playerPos.x +2);
-        //cameraí«è]
+      
         _cameraPos = Vector3.Lerp(transform.position,_newcameraPos
                                     ,5.0f* Time.deltaTime);
         transform.position = _cameraPos;

@@ -9,7 +9,7 @@ public class Gameover : MonoBehaviour
     {
         if (transform.position.y < _fallheight)
         {
-            Debug.Log("Over");
+            
         }
     }
 }
