@@ -5,7 +5,7 @@ using UnityEngine;
 public class Gameover : MonoBehaviour
 {
     float _fallheight = -10.0f;
-    private void FixedUpdate()
+    private void Update()
     {
         if (transform.position.y < _fallheight)
         {

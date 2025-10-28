@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Playercontroller : MonoBehaviour
 {
@@ -48,6 +49,11 @@ public class Playercontroller : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        //_groundHitdetect = Physics.BoxCast(transform.position,
+        _groundHitdetect = Physics.BoxCast(transform.position + Vector3.down, Vector3.one *0.5f, Vector3.down,out _groundHit,transform.rotation);
+        if (_groundHitdetect)
+        {
+           Debug.Log( _groundHit.collider.name);
+            Gizmos.DrawWireCube(transform.position + Vector3.down, Vector3.one);
+        }
     }
 }
