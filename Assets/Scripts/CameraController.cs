@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField]
-    GameObject _player;
+    GameObject _player = default;
     Transform _playerTransforme;
     Vector3 _playerPos;
     Vector3 _cameraPos;

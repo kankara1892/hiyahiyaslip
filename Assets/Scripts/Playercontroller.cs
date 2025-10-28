@@ -4,47 +4,50 @@ using UnityEngine;
 
 public class Playercontroller : MonoBehaviour
 {
-    [SerializeField,Tooltip("加速度")]
-    float speed = 25f;
-    [SerializeField]
-    float _maxMagunitude;
+    [SerializeField,Tooltip("加速度")] float speed = default;
+    [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
+    [SerializeField]float _maxMagunitude;
     float Horizontal;
     float Vertical;
-    Rigidbody rb;
+    float minInputValue = 0.001f;
     Vector3 Player_pos;
-    Vector3 diff;
+    Vector3 _movementDifference;
+    Vector3 _inputDirection;
+    RaycastHit _groundHit;
+    bool _groundHitdetect ;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        Player_pos = GetComponent<Transform>().position;
-    }
     private void Update()
     {
         //入力
         Horizontal =Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
+        _inputDirection = new Vector3(Horizontal, 0, Vertical);
     }
 
     private void FixedUpdate()
     {
         //player進行方向回転
-        diff = new Vector3(transform.position.x, 0, transform.position.z)
+        _movementDifference= new Vector3(transform.position.x, 0, transform.position.z)
                 - new Vector3(Player_pos.x, 0, Player_pos.z);
 
         Player_pos = transform.position;
-        if (diff.magnitude > 0.01f)
+        if (_movementDifference.magnitude >minInputValue )
         {
             transform.rotation =
-                Quaternion.LookRotation(diff);
+                Quaternion.LookRotation(_movementDifference);
         }
 
         //移動
-        Vector3 force = Vector3.zero;
-        force =new Vector3 (Horizontal,0,Vertical)*speed;
-        if(rb.velocity.magnitude <= _maxMagunitude)
+        Vector3 _movementforce = Vector3.zero;
+        _movementforce =_inputDirection*speed;
+        if(_rigidbody.velocity.magnitude <= _maxMagunitude)
         {
-            rb.AddForce(force);
+            _rigidbody.AddForce(_movementforce);
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        //_groundHitdetect = Physics.BoxCast(transform.position,
     }
 }
