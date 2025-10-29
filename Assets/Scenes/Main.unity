@@ -673,7 +673,7 @@ GameObject:
   - component: {fileID: 865201894}
   m_Layer: 0
   m_Name: boostfloor
-  m_TagString: Untagged
+  m_TagString: BoostFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -989,6 +989,7 @@ GameObject:
   - component: {fileID: 1019081399}
   - component: {fileID: 1019081398}
   - component: {fileID: 1019081397}
+  - component: {fileID: 1019081403}
   - component: {fileID: 1019081396}
   - component: {fileID: 1019081402}
   m_Layer: 0
@@ -1022,8 +1023,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6ae1abf28ea4a84999d35b1d3c4e5b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
   _rigidbody: {fileID: 1019081402}
+  speed: 25
   _maxMagunitude: 20
 --- !u!136 &1019081398
 CapsuleCollider:
@@ -1141,6 +1142,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &1019081403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019081395}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb6ea7d1525301942baf03af1bc62e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody: {fileID: 1019081402}
+  _boostSpeed: 10
 --- !u!1 &1154888226
 GameObject:
   m_ObjectHideFlags: 0

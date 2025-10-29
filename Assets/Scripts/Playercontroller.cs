@@ -4,25 +4,26 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Playercontroller : MonoBehaviour
-{
-    [SerializeField,Tooltip("‰Á‘¬“x")] float speed = default;
+{ 
     [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
+    [SerializeField,Tooltip("‰Á‘¬“x")] float speed = default;
     [SerializeField]float _maxMagunitude;
     float Horizontal;
     float Vertical;
     float minInputValue = 0.001f;
+    bool _groundHitdetect ;
     Vector3 Player_pos;
     Vector3 _movementDifference;
     Vector3 _inputDirection;
-    RaycastHit _groundHit;
-    bool _groundHitdetect ;
+   
+    
 
     private void Update()
     {
         //“ü—Í
         Horizontal =Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
-        _inputDirection = new Vector3(Horizontal, 0, Vertical);
+        _inputDirection = new Vector3(Horizontal, 0, Vertical);  
     }
 
     private void FixedUpdate()
@@ -40,20 +41,12 @@ public class Playercontroller : MonoBehaviour
 
         //ˆÚ“®
         Vector3 _movementforce = Vector3.zero;
-        _movementforce =_inputDirection*speed;
+        _movementforce =_inputDirection * speed;
         if(_rigidbody.velocity.magnitude <= _maxMagunitude)
         {
             _rigidbody.AddForce(_movementforce);
         }
+       
     }
-
-    private void OnDrawGizmos()
-    {
-        _groundHitdetect = Physics.BoxCast(transform.position + Vector3.down, Vector3.one *0.5f, Vector3.down,out _groundHit,transform.rotation);
-        if (_groundHitdetect)
-        {
-           Debug.Log( _groundHit.collider.name);
-            Gizmos.DrawWireCube(transform.position + Vector3.down, Vector3.one);
-        }
-    }
+   
 }
