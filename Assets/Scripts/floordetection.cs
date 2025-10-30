@@ -13,7 +13,7 @@ public class floorditecction : MonoBehaviour
     Vector3 Player_pos;
     string _groundHitTag;
     float _boostCooldownTimer;
-    const string BOOSTFLOOR = "Boostfloor";
+    const string BOOSTFLOOR = "BoostFloor";
     const string GROUND = "Ground";
     private void Update()
     {
@@ -27,6 +27,9 @@ public class floorditecction : MonoBehaviour
         {
             if (_boostCoolTime <= _boostCooldownTimer)
             {
+                _movementDifference = new Vector3(Player_pos.x, 0, Player_pos.z)
+                - new Vector3(transform.position.x, 0, transform.position.z);
+                Player_pos = transform.position;
                 Boost();
             }
             
@@ -35,19 +38,17 @@ public class floorditecction : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        _groundHitDetect = Physics.BoxCast(transform.position + Vector3.down, Vector3.one * 0.5f, Vector3.down, 
+        _groundHitDetect = Physics.BoxCast(transform.position + Vector3.down * 0.5f, Vector3.one * 0.5f, Vector3.down, 
                                             out _groundHit, transform.rotation,LayerMask.GetMask(GROUND));
-        Gizmos.DrawWireCube(transform.position + Vector3.down, Vector3.one);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * 0.5f, Vector3.one);
        
     }
     private void Boost()
     {
-        Debug.Log("Boost");
+        
+        Vector3 _boostValue = _movementDifference.normalized * _boostSpeed;
+        _rigidbody.AddForce(_boostValue,ForceMode.Impulse);
         _boostCooldownTimer = 0;
-        Player_pos = transform.position;
-        _movementDifference = new Vector3(transform.position.x, 0, transform.position.z)
-                - new Vector3(Player_pos.x, 0, Player_pos.z);
-        Vector3 _boostValue = _movementDifference * _boostSpeed;
-        _rigidbody.AddForce(_boostValue);
+        Debug.Log( _boostValue +"Boosted" + _movementDifference.normalized);
     }
 }
