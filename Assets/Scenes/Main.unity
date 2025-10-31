@@ -1033,7 +1033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1019081402}
   speed: 25
-  _maxMagunitude: 20
+  _speedAbusoluteValue: 60
 --- !u!136 &1019081398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 1019081402}
-  _boostSpeed: 5
+  _boostSpeed: 2
   _boostCoolTime: 1
 --- !u!1 &1154888226
 GameObject:

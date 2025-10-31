@@ -9,8 +9,7 @@ public class floorditecction : MonoBehaviour
     [SerializeField] float _boostCoolTime = default;
     RaycastHit _groundHit;
     bool _groundHitDetect;
-    Vector3 _movementDifference;
-    Vector3 Player_pos;
+    Vector3 _currentVelocity;
     string _groundHitTag;
     float _boostCooldownTimer;
     const string BOOSTFLOOR = "BoostFloor";
@@ -27,9 +26,7 @@ public class floorditecction : MonoBehaviour
         {
             if (_boostCoolTime <= _boostCooldownTimer)
             {
-                _movementDifference = new Vector3(Player_pos.x, 0, Player_pos.z)
-                - new Vector3(transform.position.x, 0, transform.position.z);
-                Player_pos = transform.position;
+                _currentVelocity = _rigidbody.velocity;
                 Boost();
             }
             
@@ -46,9 +43,9 @@ public class floorditecction : MonoBehaviour
     private void Boost()
     {
         
-        Vector3 _boostValue = _movementDifference.normalized * _boostSpeed;
+        Vector3 _boostValue = _currentVelocity * _boostSpeed;
         _rigidbody.AddForce(_boostValue,ForceMode.Impulse);
         _boostCooldownTimer = 0;
-        Debug.Log( _boostValue +"Boosted" + _movementDifference.normalized);
+        Debug.Log( _boostValue +"Boosted" + _currentVelocity);
     }
 }

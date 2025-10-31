@@ -7,7 +7,8 @@ public class Playercontroller : MonoBehaviour
 { 
     [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
     [SerializeField,Tooltip("‰Á‘¬“x")] float speed = default;
-    [SerializeField]float _maxMagunitude;
+ 
+    [SerializeField]float _speedAbusoluteValue;
     float Horizontal;
     float Vertical;
     float minInputValue = 0.001f;
@@ -41,9 +42,13 @@ public class Playercontroller : MonoBehaviour
 
         //ˆÚ“®
         Vector3 _movementforce = Vector3.zero;
+        Vector3 _currentVelocity = _rigidbody.velocity;
         _movementforce =_inputDirection * speed;
-        if(_rigidbody.velocity.magnitude <= _maxMagunitude)
+        if(_rigidbody.velocity.magnitude <= _speedAbusoluteValue)
         {
+            _rigidbody.velocity = new Vector3(Mathf.Clamp( _currentVelocity.x,-_speedAbusoluteValue,_speedAbusoluteValue),
+                                                _movementforce.y,
+                                                Mathf.Clamp(_currentVelocity.z,-_speedAbusoluteValue,_speedAbusoluteValue));
             _rigidbody.AddForce(_movementforce);
         }
        
