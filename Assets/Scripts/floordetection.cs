@@ -43,7 +43,7 @@ public class floorditecction : MonoBehaviour
     private void Boost()
     {
         
-        Vector3 _boostValue = _currentVelocity * _boostSpeed;
+        Vector3 _boostValue = _currentVelocity.normalized * _boostSpeed;
         _rigidbody.AddForce(_boostValue,ForceMode.Impulse);
         _boostCooldownTimer = 0;
         Debug.Log( _boostValue +"Boosted" + _currentVelocity);

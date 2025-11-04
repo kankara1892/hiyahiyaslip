@@ -46,10 +46,10 @@ public class Playercontroller : MonoBehaviour
         _movementforce =_inputDirection * speed;
         if(_rigidbody.velocity.magnitude <= _speedAbusoluteValue)
         {
-            _rigidbody.velocity = new Vector3(Mathf.Clamp( _currentVelocity.x,-_speedAbusoluteValue,_speedAbusoluteValue),
-                                                _movementforce.y,
-                                                Mathf.Clamp(_currentVelocity.z,-_speedAbusoluteValue,_speedAbusoluteValue));
-            _rigidbody.AddForce(_movementforce);
+            _rigidbody.velocity +=_movementforce;
+            _rigidbody.velocity = new Vector3(Mathf.Clamp(_currentVelocity.x, -_speedAbusoluteValue, _speedAbusoluteValue),
+                                                _currentVelocity.y,
+                                                Mathf.Clamp(_currentVelocity.z, -_speedAbusoluteValue, _speedAbusoluteValue));
         }
        
     }
