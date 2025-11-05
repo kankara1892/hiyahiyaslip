@@ -7,12 +7,11 @@ public class Playercontroller : MonoBehaviour
 { 
     [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
     [SerializeField,Tooltip("‰Á‘¬“x")] float speed = default;
- 
-    [SerializeField]float _speedAbusoluteValue;
+    [SerializeField]float _maxSpeedAbsoluteValue;
+    [SerializeField] float _maxSideForceAbsoluteValue;
     float Horizontal;
     float Vertical;
     float minInputValue = 0.001f;
-    bool _groundHitdetect ;
     Vector3 Player_pos;
     Vector3 _movementDifference;
     Vector3 _inputDirection;
@@ -40,17 +39,15 @@ public class Playercontroller : MonoBehaviour
                 Quaternion.LookRotation(_movementDifference);
         }
 
-        //ˆÚ“®
-        Vector3 _movementforce = Vector3.zero;
-        Vector3 _currentVelocity = _rigidbody.velocity;
-        _movementforce =_inputDirection * speed;
-        if(_rigidbody.velocity.magnitude <= _speedAbusoluteValue)
+        if(Mathf.Abs(_rigidbody.velocity.z) < _maxSpeedAbsoluteValue)
         {
-            _rigidbody.velocity +=_movementforce;
-            _rigidbody.velocity = new Vector3(Mathf.Clamp(_currentVelocity.x, -_speedAbusoluteValue, _speedAbusoluteValue),
-                                                _currentVelocity.y,
-                                                Mathf.Clamp(_currentVelocity.z, -_speedAbusoluteValue, _speedAbusoluteValue));
+            _rigidbody.AddForce((Vector3.forward * _inputDirection.z) * speed);
         }
+        if(Mathf.Abs( _rigidbody.velocity.x) < _maxSideForceAbsoluteValue)
+        {
+            _rigidbody.AddForce((Vector3.right * _inputDirection.x )* speed);
+        }
+        
        
     }
    
