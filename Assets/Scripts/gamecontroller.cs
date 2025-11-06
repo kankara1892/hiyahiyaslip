@@ -26,7 +26,13 @@ public class gamecontroller : MonoBehaviour
         switch (_gameState)
         {
             case gamestate.start:
-                StartSet();
+
+                SetStart();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+
+                    _gameState = gamestate.playing;
+                }
                 break;
 
             case gamestate.playing:
@@ -43,9 +49,9 @@ public class gamecontroller : MonoBehaviour
         }
 
     }
-    private void StartSet()
+    private void SetStart()
     {
-
+        StartUI.SetActive(true);
     }
     private void PlayingSet()
     {

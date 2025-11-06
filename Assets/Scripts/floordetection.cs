@@ -18,12 +18,14 @@ public class floorditecction : MonoBehaviour
     {
         _boostCooldownTimer += Time.deltaTime;
         
-        if(_groundHitDetect )
+        if(_groundHitDetect)
         {
             _groundHitTag = _groundHit.collider.tag;
+            
         }
         if (_groundHitTag == BOOSTFLOOR)
-        {
+        { 
+            Debug.Log("isActive");
             if (_boostCoolTime <= _boostCooldownTimer)
             {
                 _currentVelocity = _rigidbody.velocity;
@@ -35,14 +37,14 @@ public class floorditecction : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        _groundHitDetect = Physics.BoxCast(transform.position + Vector3.down * 0.5f, Vector3.one * 0.5f, Vector3.down, 
+        
+        _groundHitDetect = Physics.BoxCast(transform.position + Vector3.down * 0.6f, Vector3.one * 0.25f, Vector3.down*2, 
                                             out _groundHit, transform.rotation,LayerMask.GetMask(GROUND));
-        Gizmos.DrawWireCube(transform.position + Vector3.down * 0.5f, Vector3.one);
+        Gizmos.DrawWireCube(transform.position + Vector3.down * 0.6f, Vector3.one);
        
     }
     private void Boost()
     {
-        
         Vector3 _boostValue = _currentVelocity.normalized * _boostSpeed;
         _rigidbody.AddForce(_boostValue,ForceMode.Impulse);
         _boostCooldownTimer = 0;
