@@ -31,7 +31,6 @@ public class Playercontroller : MonoBehaviour
         //playeris•ûŒü‰ñ“]
         _movementDifference= new Vector3(transform.position.x, 0, transform.position.z)
                 - new Vector3(Player_pos.x, 0, Player_pos.z);
-
         Player_pos = transform.position;
         if (_movementDifference.magnitude >minInputValue )
         {
