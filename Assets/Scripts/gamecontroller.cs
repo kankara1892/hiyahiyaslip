@@ -9,6 +9,7 @@ public class gamecontroller : MonoBehaviour
     [SerializeField] GameObject StartUI = default;
     [SerializeField] GameObject PlayingUI = default;
     [SerializeField] GameObject GameoverUI = default;
+    bool _isStarting;
     private enum gamestate
     {
         start,
@@ -27,11 +28,18 @@ public class gamecontroller : MonoBehaviour
         {
             case gamestate.start:
 
-                SetStart();
-                if (Input.GetKeyDown(KeyCode.Space))
+                if (!_isStarting)
                 {
-
+                    SetStart();
+                }
+                
+                if (Input.anyKey)
+                {
+                    _isStarting = false;
+                    StartUI.SetActive(false);
+                    Time.timeScale = 1;
                     _gameState = gamestate.playing;
+
                 }
                 break;
 
@@ -52,6 +60,8 @@ public class gamecontroller : MonoBehaviour
     private void SetStart()
     {
         StartUI.SetActive(true);
+        _isStarting = true;
+        Time.timeScale = 0;
     }
     private void PlayingSet()
     {

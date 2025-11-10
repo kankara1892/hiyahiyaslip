@@ -14,10 +14,7 @@ public class Playercontroller : MonoBehaviour
     float minInputValue = 0.001f;
     Vector3 Player_pos;
     Vector3 _movementDifference;
-    Vector3 _inputDirection;
-   
-    
-
+    Vector3 _inputDirection;    
     private void Update()
     {
         //“ü—Í
@@ -29,14 +26,17 @@ public class Playercontroller : MonoBehaviour
     private void FixedUpdate()
     {
         //playeris•ûŒü‰ñ“]
-        _movementDifference= new Vector3(transform.position.x, 0, transform.position.z)
-                - new Vector3(Player_pos.x, 0, Player_pos.z);
+        _movementDifference= new Vector3(transform.position.x, transform.position.y, transform.position.z)
+                - new Vector3(Player_pos.x, transform.position.y, Player_pos.z);
         Player_pos = transform.position;
-        if (_movementDifference.magnitude >minInputValue )
+        
+        if (_inputDirection.magnitude>minInputValue )
         {
             transform.rotation =
                 Quaternion.LookRotation(_movementDifference);
-        }
+        } 
+        
+       
 
         if(Mathf.Abs(_rigidbody.velocity.z) < _maxSpeedAbsoluteValue)
         {
