@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -6,26 +6,33 @@ using UnityEngine.UIElements;
 public class Playercontroller : MonoBehaviour
 { 
     [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
-    [SerializeField,Tooltip("‰Á‘¬“x")] float speed = default;
+    [SerializeField,Tooltip("åŠ é€Ÿåº¦")] float speed = default;
     [SerializeField]float _maxSpeedAbsoluteValue;
     [SerializeField] float _maxSideForceAbsoluteValue;
     float Horizontal;
     float Vertical;
     float minInputValue = 0.001f;
+    bool isGround;
     Vector3 Player_pos;
     Vector3 _movementDifference;
     Vector3 _inputDirection;    
+    
     private void Update()
     {
-        //“ü—Í
+        //å…¥åŠ›
         Horizontal =Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
-        _inputDirection = new Vector3(Horizontal, 0, Vertical);  
+        _inputDirection = new Vector3(Horizontal, 0, Vertical);
+        isGround= gameObject.GetComponent<floorditecction>().IsGround;
+        if (isGround)
+        {
+
+        }
     }
 
     private void FixedUpdate()
     {
-        //playeris•ûŒü‰ñ“]
+        //playeré€²è¡Œæ–¹å‘å›è»¢
         _movementDifference= new Vector3(transform.position.x, transform.position.y, transform.position.z)
                 - new Vector3(Player_pos.x, transform.position.y, Player_pos.z);
         Player_pos = transform.position;

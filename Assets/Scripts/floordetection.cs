@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +24,10 @@ public class floorditecction : MonoBehaviour
         {
             _groundHitTag = _groundHit.collider.tag;
         }
+        else
+        {
+            return;
+        }
         if (_groundHitTag == BOOSTFLOOR)
         { 
             Debug.Log("isActive");
@@ -31,8 +35,7 @@ public class floorditecction : MonoBehaviour
             {
                 _currentVelocity = _rigidbody.velocity;
                 Boost();
-            }
-            
+            } 
         }
     }
     private void Boost()
@@ -41,5 +44,9 @@ public class floorditecction : MonoBehaviour
         _rigidbody.AddForce(_boostValue,ForceMode.Impulse);
         _boostCooldownTimer = 0;
         Debug.Log( _boostValue +"Boosted" + _currentVelocity);
+    }
+    public bool IsGround
+    {
+        get { return _groundHitDetect; }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,7 +33,7 @@ public class gamecontroller : MonoBehaviour
                     SetStart();
                 }
                 
-                if (Input.anyKey)
+                if (Input.GetKeyDown(KeyCode.Tab))
                 {
                     _isStarting = false;
                     StartUI.SetActive(false);
