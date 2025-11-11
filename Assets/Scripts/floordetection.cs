@@ -13,15 +13,16 @@ public class floorditecction : MonoBehaviour
     string _groundHitTag;
     float _boostCooldownTimer;
     const string BOOSTFLOOR = "BoostFloor";
-    const string GROUND = "Ground";
+    LayerMask GROUNDLayer = 1<<6;
     private void Update()
     {
+        Ray GroundDitectionRay = new Ray(transform.position,Vector3.down);
+        _groundHitDetect = Physics.Raycast(GroundDitectionRay,out _groundHit,1.2f,GROUNDLayer);
         _boostCooldownTimer += Time.deltaTime;
-        
+        Debug.DrawRay(transform.position, Vector3.down*1.2f, Color.red);
         if(_groundHitDetect)
         {
             _groundHitTag = _groundHit.collider.tag;
-            
         }
         if (_groundHitTag == BOOSTFLOOR)
         { 
@@ -33,15 +34,6 @@ public class floorditecction : MonoBehaviour
             }
             
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        
-        _groundHitDetect = Physics.BoxCast(transform.position + Vector3.down * 0.6f, Vector3.one * 0.25f, Vector3.down*2, 
-                                            out _groundHit, transform.rotation,LayerMask.GetMask(GROUND));
-        Gizmos.DrawWireCube(transform.position + Vector3.down * 0.6f, Vector3.one);
-       
     }
     private void Boost()
     {
