@@ -5,17 +5,31 @@ using UnityEngine.UIElements;
 
 public class Playercontroller : MonoBehaviour
 { 
-    [SerializeField,Tooltip("Rigidbody")] Rigidbody _rigidbody = default;
-    [SerializeField,Tooltip("加速度")] float speed = default;
-    [SerializeField]float _maxSpeedAbsoluteValue;
-    [SerializeField] float _maxSideForceAbsoluteValue;
-    float Horizontal;
-    float Vertical;
-    float minInputValue = 0.001f;
-    bool isGround;
-    Vector3 Player_pos;
-    Vector3 _movementDifference;
-    Vector3 _inputDirection;    
+    [SerializeField,Tooltip("Rigidbody")] private Rigidbody _rigidbody = default;
+    [SerializeField,Tooltip("加速度")] private float speed = default;
+    [SerializeField] private float _maxSpeedAbsoluteValue;
+    [SerializeField] private float _maxSideForceAbsoluteValue;
+    [SerializeField] private floordetection Floordetection = default;
+    private float Horizontal;
+    private float Vertical;
+    private float minInputValue = 0.001f;
+    private float _inputMagnitude;
+    private bool isGround;
+    private bool Jumpingfrag;
+    private Vector3 Playerposition;
+    private Vector3 _movementDifference;
+    private Vector3 _inputDirection;
+    private PlayerState playerState;
+    private enum PlayerState 
+    {
+        Idle,
+        Run,
+        Jump,
+    }
+    private void Awake()
+    {
+        playerState = PlayerState.Idle;
+    }
     
     private void Update()
     {
@@ -23,9 +37,47 @@ public class Playercontroller : MonoBehaviour
         Horizontal =Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
         _inputDirection = new Vector3(Horizontal, 0, Vertical);
-        isGround= gameObject.GetComponent<floorditecction>().IsGround;
-        if (isGround)
+        _inputMagnitude = _inputDirection.magnitude;
+        isGround= Floordetection.IsGround;
+        if (!isGround & !Jumpingfrag)
         {
+            playerState = PlayerState.Jump;
+            Jumpingfrag = true;
+        }
+
+        switch(playerState) {
+            case PlayerState.Idle:
+                if(_inputMagnitude > minInputValue  & isGround)
+                {
+                    playerState = PlayerState.Run;
+                }
+                if (!isGround)
+                {
+                    playerState = PlayerState.Jump;
+                }
+                break;
+
+            case PlayerState.Run:
+                if(_inputMagnitude <= minInputValue)
+                {
+                    playerState = PlayerState.Idle;
+                }
+                if (!isGround)
+                {
+                    playerState = PlayerState.Jump; 
+                }
+                break;
+
+            case PlayerState.Jump:
+                if (_inputMagnitude > minInputValue & isGround)
+                {
+                    playerState = PlayerState.Run;
+                }
+                if (_inputMagnitude <= minInputValue)
+                {
+                    playerState = PlayerState.Idle;
+                }
+                break;
 
         }
     }
@@ -34,17 +86,15 @@ public class Playercontroller : MonoBehaviour
     {
         //player進行方向回転
         _movementDifference= new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                - new Vector3(Player_pos.x, transform.position.y, Player_pos.z);
-        Player_pos = transform.position;
+                - new Vector3(Playerposition.x, transform.position.y, Playerposition.z);
+        Playerposition = transform.position;
         
-        if (_inputDirection.magnitude>minInputValue )
+        if (_inputMagnitude>minInputValue )
         {
             transform.rotation =
                 Quaternion.LookRotation(_movementDifference);
         } 
         
-       
-
         if(Mathf.Abs(_rigidbody.velocity.z) < _maxSpeedAbsoluteValue)
         {
             _rigidbody.AddForce((Vector3.forward * _inputDirection.z) * speed);

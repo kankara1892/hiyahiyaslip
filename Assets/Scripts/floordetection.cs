@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class floorditecction : MonoBehaviour
+public class floordetection : MonoBehaviour
 {
     [SerializeField] Rigidbody _rigidbody = default;
     [SerializeField] float _boostSpeed = default;

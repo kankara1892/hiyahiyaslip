@@ -891,6 +891,7 @@ MonoBehaviour:
   speed: 20
   _maxSpeedAbsoluteValue: 30
   _maxSideForceAbsoluteValue: 40
+  Floordetection: {fileID: 1019081403}
 --- !u!136 &1019081398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3856,6 +3857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterAnimator: {fileID: 7969366017675430442}
+  _playerController: {fileID: 1019081397}
 --- !u!4 &7994471686207301369
 Transform:
   m_ObjectHideFlags: 0
