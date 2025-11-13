@@ -25,12 +25,17 @@ public class Playercontroller : MonoBehaviour
         Idle,
         Run,
         Jump,
+        land
     }
     private void Awake()
     {
         playerState = PlayerState.Idle;
     }
-    
+    public int playerStateNumber
+    {
+        get { return (int)playerState; }
+    }
+
     private void Update()
     {
         //入力
@@ -69,11 +74,17 @@ public class Playercontroller : MonoBehaviour
                 break;
 
             case PlayerState.Jump:
+                if (isGround)
+                {
+                    playerState = PlayerState.land;
+                }
+                break;
+            case PlayerState.land:
                 if (_inputMagnitude > minInputValue & isGround)
                 {
                     playerState = PlayerState.Run;
                 }
-                if (_inputMagnitude <= minInputValue)
+                if (_inputMagnitude <= minInputValue & isGround)
                 {
                     playerState = PlayerState.Idle;
                 }
