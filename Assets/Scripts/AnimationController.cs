@@ -12,10 +12,13 @@ public class AnimationController : MonoBehaviour
     private const int _stateJumpNumber = 2;
     private const int _stateLandNumber = 3;
     private int _currentStateNumber;
+    private float _currentVertical;
     private void Update()
     {
         _currentStateNumber = _playerController.playerStateNumber;
-        if(_currentStateNumber == _stateLandNumber)
+        _currentVertical = _playerController.playerVertical;
+        _characterAnimator.SetFloat("Vertical Speed", _currentVertical);
+        if (_currentStateNumber == _stateLandNumber)
         {
            _characterAnimator.SetBool("Grounded", true);
         }

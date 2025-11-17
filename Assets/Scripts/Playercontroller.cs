@@ -14,8 +14,10 @@ public class Playercontroller : MonoBehaviour
     private float Vertical;
     private float minInputValue = 0.001f;
     private float _inputMagnitude;
+    private float _playerVertical;
     private bool isGround;
     private bool Jumpingfrag;
+    private bool isGoal = false;
     private Vector3 Playerposition;
     private Vector3 _movementDifference;
     private Vector3 _inputDirection;
@@ -35,7 +37,14 @@ public class Playercontroller : MonoBehaviour
     {
         get { return (int)playerState; }
     }
-
+    public float playerVertical
+    {
+        get { return _playerVertical; }
+    }
+    public bool IsGoal
+    {
+        get { return isGoal; }
+    }
     private void Update()
     {
         //入力
@@ -43,7 +52,8 @@ public class Playercontroller : MonoBehaviour
         Vertical = Input.GetAxis("Vertical");
         _inputDirection = new Vector3(Horizontal, 0, Vertical);
         _inputMagnitude = _inputDirection.magnitude;
-        isGround= Floordetection.IsGround;
+        isGround = Floordetection.IsGround;
+        _playerVertical = _rigidbody.velocity.y;
         if (!isGround & !Jumpingfrag)
         {
             playerState = PlayerState.Jump;
@@ -117,5 +127,17 @@ public class Playercontroller : MonoBehaviour
         
        
     }
-   
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.transform.CompareTag("goal"))
+        {
+            return;
+        }
+        else
+        {
+            isGoal = true;
+            Time.timeScale = 0;
+        }
+    }
+
 }

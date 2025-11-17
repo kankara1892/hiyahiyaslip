@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gamecontroller : MonoBehaviour
 {
@@ -9,7 +10,12 @@ public class gamecontroller : MonoBehaviour
     [SerializeField] GameObject StartUI = default;
     [SerializeField] GameObject PlayingUI = default;
     [SerializeField] GameObject GameoverUI = default;
+    [SerializeField] Playercontroller _playerController;
+    [SerializeField] Gameover gameover;
     bool _isStarting;
+    bool _isGoal;
+    bool _isGameover;
+
     private enum gamestate
     {
         start,
@@ -24,6 +30,8 @@ public class gamecontroller : MonoBehaviour
     }
     private void Update()
     {
+        _isGoal = _playerController.IsGoal;
+        _isGameover = gameover.giveIsOver;
         switch (_gameState)
         {
             case gamestate.start:
@@ -33,7 +41,7 @@ public class gamecontroller : MonoBehaviour
                     SetStart();
                 }
                 
-                if (Input.GetKeyDown(KeyCode.Tab))
+                if (Input.anyKeyDown)
                 {
                     _isStarting = false;
                     StartUI.SetActive(false);
@@ -45,14 +53,30 @@ public class gamecontroller : MonoBehaviour
 
             case gamestate.playing:
                 PlayingSet();
+                if (_isGoal)
+                {
+                    _gameState = gamestate.goal;
+                }
+                if (_isGameover)
+                {
+                    _gameState = gamestate.gameover;
+                }
                 break;
 
             case gamestate.gameover:
                 GameoverSet();
+                if (Input.anyKeyDown)
+                {
+                    SceneManager.LoadScene("Title");
+                }
                 break;
 
             case gamestate.goal:
                 GoalSet();
+                if (Input.anyKeyDown)
+                {
+                    SceneManager.LoadScene("Title");
+                }
                 break;
         }
 
@@ -69,10 +93,11 @@ public class gamecontroller : MonoBehaviour
     }
     private void GameoverSet()
     {
-
+        GameoverUI.SetActive(true);
+        Time.timeScale = 0;
     }
     private void GoalSet()
     {
-
+        GoalUI.SetActive(true);
     }
 }
