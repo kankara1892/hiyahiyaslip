@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject _player = default;
+    [SerializeField] GameObject _player = default;
+    [Header("CameraSetting")]
+    [SerializeField, Tooltip("âúçsç≈ëÂ")] float offsetMax_z = default;
+    [SerializeField, Tooltip("âúçsç≈í·")] float offsetMin_z = default;
     Transform _playerTransforme;
     Vector3 _playerPos;
     Vector3 _cameraPos;

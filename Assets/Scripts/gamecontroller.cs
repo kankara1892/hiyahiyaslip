@@ -30,6 +30,7 @@ public class gamecontroller : MonoBehaviour
     }
     private void Update()
     {
+        //UIの遷移
         _isGoal = _playerController.IsGoal;
         _isGameover = gameover.giveIsOver;
         switch (_gameState)

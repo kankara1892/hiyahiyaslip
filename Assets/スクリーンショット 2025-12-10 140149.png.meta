@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f795177a340b95a4e8933df4652a8ac2
+guid: f5bcdbe9f1d86c647b20b288da4642da
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,43 +95,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1b7296a4-07d3-48c5-ac19-0e91b0464b47_0
+      name: "\u30B9\u30AF\u30EA\u30FC\u30F3\u30B7\u30E7\u30C3\u30C8 2025-12-10 140149_0"
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1024
-        height: 1236
+        width: 1615
+        height: 901
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 976ce2a6ed8bd92418ecd375a0af16f0
-      internalID: -1008112852
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: 1b7296a4-07d3-48c5-ac19-0e91b0464b47_1
-      rect:
-        serializedVersion: 2
-        x: 863
-        y: 0
-        width: 161
-        height: 1231
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 125, y: 0, z: 0, w: 280}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: be930bca67db1f447b26cc9a606d4db4
-      internalID: -2070567220
+      spriteID: e182e21c2715d5d45abb83b766474fa8
+      internalID: 864490795
       vertices: []
       indices: 
       edges: []
@@ -139,7 +118,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7dfb8fe6ab3ac1c4194f898a6f34f420
+    spriteID: 922bff52d11f880469c602e14379c493
     internalID: 0
     vertices: []
     indices: 
@@ -147,8 +126,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      1b7296a4-07d3-48c5-ac19-0e91b0464b47_0: -1008112852
-      1b7296a4-07d3-48c5-ac19-0e91b0464b47_1: -2070567220
+      "\u30B9\u30AF\u30EA\u30FC\u30F3\u30B7\u30E7\u30C3\u30C8 2025-12-10 140149_0": 864490795
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
