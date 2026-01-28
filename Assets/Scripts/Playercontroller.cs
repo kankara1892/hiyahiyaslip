@@ -9,7 +9,7 @@ public class Playercontroller : MonoBehaviour
     [SerializeField,Tooltip("加速度")] private float speed = default;
     [SerializeField] private float _maxSpeedAbsoluteValue;
     [SerializeField] private float _maxSideForceAbsoluteValue;
-    [SerializeField] private floordetection Floordetection = default;
+    [SerializeField] private Granddetection Floordetection = default;
     private float Horizontal;
     private float Vertical;
     private float minInputValue = 0.001f;
@@ -45,6 +45,7 @@ public class Playercontroller : MonoBehaviour
     {
         get { return isGoal; }
     }
+
     private void Update()
     {
         //入力
@@ -124,20 +125,6 @@ public class Playercontroller : MonoBehaviour
         {
             _rigidbody.AddForce((Vector3.right * _inputDirection.x )* speed);
         }
-        
        
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!other.transform.CompareTag("goal"))
-        {
-            return;
-        }
-        else
-        {
-            isGoal = true;
-            Time.timeScale = 0;
-        }
-    }
-
 }

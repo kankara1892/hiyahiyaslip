@@ -6,6 +6,8 @@ TagManager:
   tags:
   - BoostFloor
   - goal
+  - Item
+  - shark
   layers:
   - Default
   - TransparentFX

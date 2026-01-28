@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         _cameraPos = transform.position;
         
         _newcameraPos = new Vector3(_playerPos.x, _cameraPos.y,
-            Mathf.Clamp(_playerPos.z  - 15,_playerPos.z-20,_playerPos.z-5));
+            Mathf.Clamp(_playerPos.z  - 15,_playerPos.z-15,_playerPos.z-5));
 
         _newcameraPos.x = Mathf.Clamp(_newcameraPos.x,_playerPos.x-2,_playerPos.x +2);
       

@@ -17,4 +17,11 @@ public class Gameover : MonoBehaviour
             IsOver = true;
         }
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "shark")
+        {
+            IsOver = true;
+        }
+    }
 }
