@@ -8,6 +8,7 @@ TagManager:
   - goal
   - Item
   - shark
+  - safe
   layers:
   - Default
   - TransparentFX

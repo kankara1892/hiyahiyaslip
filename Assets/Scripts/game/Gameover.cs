@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Gameover : MonoBehaviour
+{
+    bool IsOver= false;
+    float _fallheight = -1.0f;
+    public bool giveIsOver
+    {
+        get { return IsOver; }
+    }
+    private void Update()
+    {
+        if (transform.position.y < _fallheight)
+        {
+            IsOver = true;
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "shark")
+        {
+            IsOver = true;
+        }
+    }
+}
