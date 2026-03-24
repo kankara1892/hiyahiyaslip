@@ -9,7 +9,7 @@ public class StagePool : MonoBehaviour
     {
         [Header("İ’è‚·‚éƒ^ƒO")]
         public string tag;
-        [Header("“o˜^‚·‚éprehab")]
+        [Header("“o˜^‚·‚éprefab")]
         public GameObject prefab;
         [Header("ƒv[ƒ‹‚Éì‚é”")]
         public int quantity;
