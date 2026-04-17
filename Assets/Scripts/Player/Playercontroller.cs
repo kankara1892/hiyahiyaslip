@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+
 
 public class Playercontroller : MonoBehaviour
 { 
@@ -111,18 +111,17 @@ public class Playercontroller : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //player進行方向回転
-        _movementDifference= new Vector3(transform.position.x, transform.position.y, transform.position.z)
-                - new Vector3(Playerposition.x, transform.position.y, Playerposition.z);
-        Playerposition = transform.position;
-        
-        if (_inputMagnitude>minInputValue )
+        if (_inputMagnitude >= minInputValue)
         {
-            transform.rotation =
-                Quaternion.LookRotation(_movementDifference);
-        } 
-        
-        if(Mathf.Abs(_rigidbody.velocity.z) < _maxSpeedAbsoluteValue)
+            // 入力の方向をそのまま向かせる（移動した結果を待たない）
+            Vector3 lookDir = new Vector3(Horizontal, 0, Vertical);
+            if (lookDir != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(lookDir);
+            }
+        }
+       
+        if (Mathf.Abs(_rigidbody.velocity.z) < _maxSpeedAbsoluteValue)
         {
             _rigidbody.AddForce((Vector3.forward * _inputDirection.z) * speed);
         }
